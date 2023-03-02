@@ -3,7 +3,7 @@ import Article from "../schemas/Article.js";
 import { ResponseNewsModel } from "../modelsDB/ArticleModel.js";
 
 const newsService = {
-  _getNews: async (params: any, res: express.Response): Promise<ResponseNewsModel | null> => {
+  getNews: async (params: any, res: express.Response): Promise<ResponseNewsModel | null> => {
     try {
       const { lang, pageSize = 10 } = params;
 
@@ -33,11 +33,29 @@ const newsService = {
       return null;
     }
   },
-  get getNews() {
-    return this._getNews;
-  },
-  set getNews(value) {
-    this._getNews = value;
+
+  likeArticle: async (params: any, res: express.Response): Promise<any> => {
+    try {
+      const { id } = params;
+
+      const article = await Article.findById(id);
+
+      if (!article) {
+        res.status(400).json({ message: "Article not found" });
+        return null;
+      }
+
+      const test = article.toObject();
+
+      article.set({ isLiked: !test.isLiked });
+
+      await article.save();
+
+      return article.toObject();
+    } catch (e) {
+      res.status(500).send({ message: "Something went wrong" });
+      return null;
+    }
   },
 };
 

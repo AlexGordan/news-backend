@@ -7,10 +7,29 @@ export interface FetchNewsParams {
   pageSize: number;
 }
 
+export interface FetchLikeParams {
+  id: string;
+}
+
 const newsController = {
   getNewsAsync: async (req: express.Request<FetchNewsParams>, res: express.Response): Promise<express.Response<any, any> | undefined> => {
     try {
       const result: ResponseNewsModel | null = await newsService.getNews(req.query, res);
+
+      if (result) {
+        return res.json(result);
+      }
+    } catch (e: any) {
+      return res.status(500).json({ message: e.message });
+    }
+  },
+
+  likeArticleAsync: async (
+    req: express.Request<FetchLikeParams>,
+    res: express.Response
+  ): Promise<express.Response<any, any> | undefined> => {
+    try {
+      const result: any | null = await newsService.likeArticle(req.query, res);
 
       if (result) {
         return res.json(result);

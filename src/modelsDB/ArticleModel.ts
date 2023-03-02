@@ -2,6 +2,7 @@ export interface ArticleModel {
   url: string;
   title: string;
   image: string;
+  isLiked: boolean;
   content: string;
   language: string;
   description: string;

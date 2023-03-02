@@ -9,6 +9,7 @@ const schema = new Schema({
   description: { type: String, required: true },
   publishedAt: { type: String, required: true },
   source: { type: Object, required: true },
+  isLiked: { type: Boolean, required: true },
   language: { type: String, required: true },
 });
 export default model<ArticleModel>("New", schema);
