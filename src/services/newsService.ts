@@ -27,7 +27,7 @@ const newsService = {
         return null;
       }
 
-      return { articles: findedArticles, totalArticles: articles.length };
+      return { articles: findedArticles, totalArticles: findedArticles.length };
     } catch (e) {
       res.status(500).send({ message: "Something went wrong" });
       return null;
