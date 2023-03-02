@@ -5,7 +5,12 @@ import { ResponseNewsModel } from "../modelsDB/ArticleModel.js";
 const newsService = {
   _getNews: async (params: any, res: express.Response): Promise<ResponseNewsModel | null> => {
     try {
-      const { lang, pageSize } = params;
+      const { lang, pageSize = 10 } = params;
+
+      if (!lang) {
+        res.status(400).json({ message: "Parameter lang is required" });
+        return null;
+      }
 
       const articles = await Article.find();
 
