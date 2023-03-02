@@ -1,8 +1,6 @@
 import express from "express";
-import { validationResult } from "express-validator";
-import { ResponseNewsModel } from "../modelsDB/ArticleModel";
-
-import { newsService } from "../services/newsService";
+import { newsService } from "../services/newsService.js";
+import { ResponseNewsModel } from "../modelsDB/ArticleModel.js";
 
 export interface FetchNewsParams {
   lang: string;
@@ -12,7 +10,7 @@ export interface FetchNewsParams {
 const newsController = {
   getNewsAsync: async (req: express.Request<FetchNewsParams>, res: express.Response): Promise<express.Response<any, any> | undefined> => {
     try {
-      const result: ResponseNewsModel | null = await newsService.getNews(req.params, res);
+      const result: ResponseNewsModel | null = await newsService.getNews(req.query, res);
 
       if (result) {
         return res.json(result);

@@ -3,6 +3,7 @@ export interface ArticleModel {
   title: string;
   image: string;
   content: string;
+  language: string;
   description: string;
   publishedAt: string;
   source: { name: string; url: string };

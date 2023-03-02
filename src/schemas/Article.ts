@@ -1,5 +1,5 @@
+import { ArticleModel } from "../modelsDB/ArticleModel.js";
 import { Schema, model } from "mongoose";
-import { ArticleModel } from "../modelsDB/ArticleModel";
 
 const schema = new Schema({
   url: { type: String, required: true },
@@ -9,5 +9,6 @@ const schema = new Schema({
   description: { type: String, required: true },
   publishedAt: { type: String, required: true },
   source: { type: Object, required: true },
+  language: { type: String, required: true },
 });
 export default model<ArticleModel>("New", schema);

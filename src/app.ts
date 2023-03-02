@@ -1,7 +1,7 @@
-import config from "./config/config.json";
+import config from "./config/config.json" assert { type: "json" };
 import express from "express";
+import newsRouter from "./routes/news.route.js";
 import mongoose, { ConnectOptions } from "mongoose";
-import newsRouter from "./routes/news.route";
 
 const PORT = config.port || 3001;
 
@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use(function (req, res, next) {
+app.use(function (_, res: any, next: any) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
   //x-requested-with, content-type, accept, authorization
