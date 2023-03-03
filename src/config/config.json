@@ -1,5 +1,0 @@
-{
-  "port": 3001,
-  "jwtSecret": "winter is coming",
-  "mongoUrl": "mongodb+srv://alexgordan:test_TEST2@loungecluster.h8gg4vr.mongodb.net/newscluster"
-}

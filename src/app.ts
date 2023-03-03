@@ -1,4 +1,3 @@
-import configJSON from "./config/config.json" assert { type: "json" };
 import express from "express";
 import newsRouter from "./routes/news.route.js";
 import mongoose, { ConnectOptions } from "mongoose";
@@ -22,7 +21,7 @@ app.use("/api/news", newsRouter);
 
 async function start() {
   try {
-    await mongoose.connect(configJSON.mongoUrl, {
+    await mongoose.connect("mongodb+srv://alexgordan:test_TEST2@loungecluster.h8gg4vr.mongodb.net/newscluster", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     } as ConnectOptions);
