@@ -1,9 +1,8 @@
-import config from "./config/config.json" assert { type: "json" };
+import configJSON from "./config/config.json" assert { type: "json" };
 import express from "express";
 import newsRouter from "./routes/news.route.js";
 import mongoose, { ConnectOptions } from "mongoose";
-
-const PORT = config.port || 3001;
+import { config } from "./config/config.js";
 
 const app = express();
 
@@ -23,13 +22,13 @@ app.use("/api/news", newsRouter);
 
 async function start() {
   try {
-    await mongoose.connect(config.mongoUrl, {
+    await mongoose.connect(configJSON.mongoUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     } as ConnectOptions);
 
-    app.listen(PORT, () => {
-      console.log(`started on port: ${PORT}`);
+    app.listen(config.server.port, () => {
+      console.log(`started on port: ${config.server.port}`);
     });
   } catch (e) {
     console.log(`Server Error: ${e}`);
